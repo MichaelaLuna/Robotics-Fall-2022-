@@ -1,13 +1,18 @@
-/* 
+/* This program is used to create a Light Chaser in RGB LED using the Arduino UNO Board. 
+Connecting the RGB LED to pin 12,11,10 and 9 to control it.
+Using the command digitalWrite to write a HIGH or LOW value to the digital pins, to open or close the RGB LED.
+Using the command delay to have a time delay during the blinking of RGB LED which creates the Light Chaser effect on it.
+The main theme is digitalWrite.
 */
 
-int time_delay = 1000;
+int time_delay = 1000; // time_delay be equal to 1000ms so can be use to replace in the next command instead of 1000
 void setup(){ // setup code to run once 
 
   pinMode(12,OUTPUT);  // pin 13 is an output
   pinMode(11,OUTPUT);  // pin 12 is an output
   pinMode(10,OUTPUT);  // pin 11 is an output
   pinMode(9,OUTPUT);  // pin 10 is an output
+  
 }
 
 void loop(){ // setup code to run repeatedly 
@@ -35,7 +40,6 @@ void loop(){ // setup code to run repeatedly
   
   digitalWrite(9,LOW); // LED turns off
     delay(time_delay);  // wait for second 
-  
  
 }
   
