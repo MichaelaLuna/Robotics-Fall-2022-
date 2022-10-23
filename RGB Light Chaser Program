@@ -1,0 +1,42 @@
+/* 
+*/
+
+int time_delay = 1000;
+void setup(){ // setup code to run once 
+
+  pinMode(12,OUTPUT);  // pin 13 is an output
+  pinMode(11,OUTPUT);  // pin 12 is an output
+  pinMode(10,OUTPUT);  // pin 11 is an output
+  pinMode(9,OUTPUT);  // pin 10 is an output
+}
+
+void loop(){ // setup code to run repeatedly 
+ 
+  digitalWrite(12,HIGH);// LED turns on 
+    delay(time_delay);  // wait for a second 
+  
+  digitalWrite(12,LOW); // LED turns off
+    delay(time_delay);  // wait for second 
+  
+   digitalWrite(11,HIGH);// LED turns on 
+    delay(time_delay);  // wait for a second 
+  
+  digitalWrite(11,LOW); // LED turns off
+    delay(time_delay);  // wait for second 
+  
+   digitalWrite(10,HIGH);// LED turns on 
+    delay(time_delay);  // wait for a second 
+  
+  digitalWrite(10,LOW); // LED turns off
+    delay(time_delay);  // wait for second 
+  
+   digitalWrite(9,HIGH);// LED turns on 
+    delay(time_delay);  // wait for a second 
+  
+  digitalWrite(9,LOW); // LED turns off
+    delay(time_delay);  // wait for second 
+  
+ 
+}
+  
+  
