@@ -1,0 +1,20 @@
+/*
+*/
+
+int Push_Button = 8;
+
+void setup(){
+  
+  pinMode(8,INPUT);
+  Serial.begin(9600);
+  
+}
+
+int PbState = digitalRead(8);
+
+void loop(){
+  
+  Serial.println(PbState);
+  
+}
+  
