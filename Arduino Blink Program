@@ -1,0 +1,21 @@
+/* This program is used to turn on and off the internal LED connected to pin 13 of the Arduino UNO. 
+Using the command LED_BUILTIN the internal LED turns on and off.
+Using an external LED and connecting it to pin 13 control them together.
+Using the command digitalWrite to write a HIGH or LOW value to the digital pin 13.
+The main theme is digitalWrite.
+*/
+
+void setup() { // setup code to run once 
+ 
+ pinMode(LED_BUILTIN,OUTPUT); // digital pin is an output 
+                               // LED_BUILTIN = pin 13 on Arduino Uno
+} 
+                                 
+void loop() { // setup code to run repeatedly 
+ 
+  digitalWrite(LED_BUILTIN,HIGH); // LED turns on 
+   delay(1000); // wait for a second 
+  
+  digitalWrite(LED_BUILTIN,LOW); // LED turns off
+   delay(1000); // wait for second 
+}
