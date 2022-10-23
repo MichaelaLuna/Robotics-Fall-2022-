@@ -1,1 +1,57 @@
+/* This program is used to create a Light Chaser that goes back and forth using the Arduino UNO Board. 
+Using external LED's and connecting them to pin 13,12,11 and 10 to control them together.
+Using the command digitalWrite to write a HIGH or LOW value to the digital pins, to open or close the LED's.
+Using the command delay to have a time delay during the blinking of LED's which creates the Light Chaser effect.
+The main theme is digitalWrite.
+*/
 
+int time_delay = 1000 // setup time_delay equivalent to 1000 to be used in the next command 
+void setup(){ // setup code to run once 
+
+  pinMode(13,OUTPUT);  // pin 13 is an output
+  pinMode(12,OUTPUT);  // pin 12 is an output
+  pinMode(11,OUTPUT);  // pin 11 is an output
+  pinMode(10,OUTPUT);  // pin 10 is an output
+}
+
+void loop(){ // setup code to run repeatedly 
+ 
+  digitalWrite(13,HIGH); // LED turns on 
+    delay(time_delay);  // wait for a second 
+  
+  digitalWrite(13,LOW); // LED turns off
+    delay(time_delay);  // wait for second 
+  
+  digitalWrite(12,HIGH); // LED turns on 
+    delay(time_delay);  // wait for a second 
+  
+  digitalWrite(12,LOW); // LED turns off
+    delay(time_delay); // wait for second 
+  
+  digitalWrite(11,HIGH); // LED turns on 
+    delay(time_delay);  // wait for a second 
+  
+  digitalWrite(11,LOW); // LED turns off
+    delay(time_delay); // wait for second 
+  
+  digitalWrite(10,HIGH); // LED turns on 
+    delay(time_delay);  // wait for a second 
+  
+  digitalWrite(10,LOW); // LED turns off
+    delay(time_delay); // wait for second 
+    
+  digitalWrite(11,HIGH); // LED turns on 
+    delay(time_delay);  // wait for a second 
+  
+  digitalWrite(11,LOW); // LED turns off
+   delay(time_delay);  // wait for second 
+  
+  digitalWrite(12,HIGH);// LED turns on 
+   delay(time_delay);  // wait for a second 
+  
+  digitalWrite(12,LOW); // LED turns off
+   delay(time_delay); // wait for second 
+
+
+}
+  
