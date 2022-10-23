@@ -1,0 +1,34 @@
+/* 
+*/
+
+int Red = 12;
+int Blue = 11;
+int Green = 10;
+int Push_Button = 9;
+int push;
+  
+void setup(){
+  pinMode(Red,OUTPUT);
+  pinMode(Blue,OUTPUT);
+  pinMode(Green,OUTPUT);
+  pinMode(Push_Button,INPUT);
+}
+
+void loop(){
+  push = digitalRead(Push_Button);
+  if(push == HIGH){
+  digitalWrite(Red,HIGH);
+  digitalWrite(Blue,HIGH);
+  digitalWrite(Green,LOW);
+  delay(1000);
+  }
+  else{
+  digitalWrite(Red,HIGH);
+  digitalWrite(Blue,LOW);
+  digitalWrite(Green,HIGH);
+  delay(1000);
+  }
+
+}
+   
+  
