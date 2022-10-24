@@ -8,10 +8,9 @@ The main theme is digitalWrite.
 int time_delay = 1000; // time_delay be equal to 1000ms so can be use to replace in the next command instead of 1000
 void setup(){ // setup code to run once 
 
-  pinMode(12,OUTPUT);  // pin 13 is an output
-  pinMode(11,OUTPUT);  // pin 12 is an output
-  pinMode(10,OUTPUT);  // pin 11 is an output
-  pinMode(9,OUTPUT);  // pin 10 is an output
+  pinMode(12,OUTPUT);  // pin 12 is an output
+  pinMode(11,OUTPUT);  // pin 11 is an output
+  pinMode(9,OUTPUT);  // pin 9 is an output
   
 }
 
