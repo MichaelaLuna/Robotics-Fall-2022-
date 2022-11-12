@@ -1,1 +1,27 @@
+#include <LiquidCrystal.h> 
 
+int Vpin=A5;
+float voltage; 
+float volts;
+const int rs = 9, en = 8, d4 = 7, d5 = 6, d6 = 5, d7 = 4;
+LiquidCrystal lcd(9, 8, 7, 6, 5, 4);
+
+void setup() {
+  
+  Serial.begin(9600);
+  lcd.begin(16,2);
+  
+}
+
+void loop() {
+  
+  voltage = analogRead(Vpin);
+  volts = voltage/1023*5.0; 
+  Serial.println(volts);
+  lcd.setCursor(0,1);
+  lcd.print("voltage = ");
+  lcd.print(volts);
+  delay(1000);
+  lcd.clear();
+
+}
