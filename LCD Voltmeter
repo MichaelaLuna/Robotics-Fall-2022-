@@ -1,27 +1,33 @@
-#include <LiquidCrystal.h> 
+* The goal of this program is to make a digital voltmeter using
+ * an Arduino UNO.In this, the voltages to be measured, which are in 
+ * analog form, are converted to digital form with the Analog 
+ * to Digital Converters (ADC), a built in in the Arduino UNO which 
+ * what we will use in this project. The main theme of this program is 
+ * learning how to activate the built in libraries in our Arduino UNO.
+ */
+ 
+ #include <LiquidCrystal.h> //include the file "LiquidCrystal.h" in the program
 
-int Vpin=A5;
-float voltage; 
-float volts;
-const int rs = 9, en = 8, d4 = 7, d5 = 6, d6 = 5, d7 = 4;
-LiquidCrystal lcd(9, 8, 7, 6, 5, 4);
+int Vpin=A5;//declare Vpin as pin connected to Analog pin5
+float voltage; //declare value of voltage in decimal form
+float volts; // declare value of volts in decimal form
+const int rs = 9, en = 8, d4 = 7, d5 = 6, d6 = 5, d7 = 4; //sets pins on LCD to their corresponding pin in the Arduino UNO board
+LiquidCrystal lcd(9, 8, 7, 6, 5, 4);//declares the pins of the LCD
 
-void setup() {
-  
-  Serial.begin(9600);
-  lcd.begin(16,2);
+void setup() { //run the codes once
+  Serial.begin(9600); //start printing on SM at 9600bits/sec
+  lcd.begin(16,2);//prints on LCD column 16, row 2
   
 }
 
-void loop() {
+void loop() { //runs the codes on loop
   
-  voltage = analogRead(Vpin);
-  volts = voltage/1023*5.0; 
-  Serial.println(volts);
-  lcd.setCursor(0,1);
-  lcd.print("voltage = ");
-  lcd.print(volts);
-  delay(1000);
-  lcd.clear();
-
+  voltage = analogRead(Vpin); //sets voltage equals to what the A5 value will give
+  volts = voltage/1023*5.0; //sets volts equal to the value read by the A5 divided by 5V
+  Serial.println(volts); //print in SM the value of volts
+  lcd.setCursor(0,1); //sets where the values will be located in the LCD
+  lcd.print("voltage = ");//print in the LCD
+  lcd.print(volts);//print the value in the LCD
+  delay(1000);//delay 1000ms
+  lcd.clear();//clear the LCD
 }
