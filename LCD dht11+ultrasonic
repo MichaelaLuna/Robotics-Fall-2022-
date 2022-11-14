@@ -1,52 +1,59 @@
-/*
-*/
-#include <dht.h> //
-#define Type DHT11 //
-#include <LiquidCrystal.h> //
+/* The goal of this program is to mix two sensors: DHT11 and the Ultrasonic sensor 
+ * and show the value produced in the LCD. Knowing that the Ultrasonic sensor is the 
+ * "eye of the tiger", meaning it can be a navigation tool for it can measure distances 
+ * using sound waves. With the case of the DHT11 sensor, it is a temperature sensor which 
+ * means it can help with getting the accurate value of the distnce since temperature 
+ * is a variable in the speed of sound equation. Since this program includes new variables
+ * again, it means using the ability to add a library in the software again which is the main
+ * theme of this program. 
+ */
+#include <dht.h> // include the file "dht.h" in the program
+#define Type DHT11 //declaring the DHT11 as a constant value
+#include <LiquidCrystal.h> //include the file "LiquidCrystal.h" in the program
 
-#define trigPin 6 //
-#define echoPin 13 //
-#define DHT11_PIN 2 //
+#define trigPin 6 //declare trigpin of ultrasonic sensor connected to pin6 of Arduino
+#define echoPin 13 //declare echopin of ultrasonic sensor connected to pin13 of Arduino
+#define DHT11_PIN 2 //declare DHT11 pin connected to pin2 of Arduino
 
-int rs=7; //
-int en=8; //
-int d4=9; //
-int d5=10; //
-int d6=11; //
-int d7=12; //
-LiquidCrystal lcd(rs,en,d4,d5,d6,d7); //
+int rs=7; //rs of LCD connects to pin7 of Arduino
+int en=8; //en of LCD connects to pin8 of Arduino
+int d4=9; //d4 of LCD connects to pin9 of Arduino
+int d5=10; //d5 of LCD connects to pin10 of Arduino
+int d6=11; //d6 of LCD connects to pin11 of Arduino
+int d7=12; //d7 of LCD connects to pin12 of Arduino
+LiquidCrystal lcd(rs,en,d4,d5,d6,d7); //setting the pins of the LCD
  
-dht DHT; //
+dht DHT; 
 
-void setup() { //
-  pinMode(trigPin, OUTPUT); //
-  pinMode(echoPin, INPUT); //
+void setup() { //runs the codes once
+  pinMode(trigPin, OUTPUT);//sets trigpin as the output
+  pinMode(echoPin, INPUT);//sets echopin as the input
 }
 
-void loop() { //
+void loop() { //runs the code on loop
   
-  float duration, distance; //
-  float speed; //
+  float duration, distance; //define the value of duration and distance in a decimal value
+  float speed; //define the value of speed in a decimal value
   
-  digitalWrite(trigPin, LOW); //
-  delayMicroseconds(2); //
-  digitalWrite(trigPin, HIGH); //
-  delayMicroseconds(10);  //
-  digitalWrite(trigPin, LOW); //
+  digitalWrite(trigPin, LOW);//turn off trigpin
+  delayMicroseconds(2);//delay 2microseconds
+  digitalWrite(trigPin, HIGH);//turn on trigpin
+  delayMicroseconds(10);//delay 10 microseconds
+  digitalWrite(trigPin, LOW);//turn off trigpin
   
-  duration = pulseIn(echoPin, HIGH); //
-  speed = 331.4 + (0.606 * DHT.temperature) + (0.0124 * DHT.humidity); //
-  distance = (duration / 2) * (speed / 10000); //
+  duration = pulseIn(echoPin, HIGH);//duration is equal to the pulsein echopin turned on
+  speed = 331.4 + (0.606 * DHT.temperature) + (0.0124 * DHT.humidity);//speed is equal to that computation
+  distance = (duration / 2) * (speed / 10000); //distance is equal to that computation
   
-  if (distance >= 400 || distance <= 2){ //
-     lcd.print("Out of range"); //
-    delay(500); //
+  if (distance >= 400 || distance <= 2){ //if distance is bigger 400 or less than 2
+     lcd.print("Out of range");//print on LCD out of range
+    delay(500);//delay 500ms
   }
-   else { //
-    lcd.print(distance); //
-    lcd.print(" cm"); //
-    delay(500); //
+   else { //if the first one not the case
+    lcd.print(distance); //print on LCD distance
+    lcd.print(" cm");//print cm after
+    delay(500);//delay 500ms
   }
-  delay(500); //
-  lcd.clear(); //
+  delay(500);//delay 500ms
+  lcd.clear();//clear LCD
 }
