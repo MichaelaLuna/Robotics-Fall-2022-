@@ -1,54 +1,60 @@
-/*
- * 
+/* The goal of this program is to power the sensor DHT11; a sensor that is capable of showing 
+ * the temperature and humidity either with the Serial Monitor who is already in the arduino 
+ * software or the LCD that will have its pins be wired with the Digital pins in the Arduino 
+ * board. Although, there is a specific main goal, doing all the wiring and coding correctly 
+ * will not do all the job because the most important step is learning how to add a library 
+ * in the software which is the "DHT Sensor Library by Adafruit" which leads me to the main 
+ * theme of this program: learning how to add a library to the Arduino IDE.
  */
-#include "DHT.h" //
-#define Type DHT11 //
-#include <LiquidCrystal.h> //
-int rs=7; //
-int en=8; //
-int d4=9; //
-int d5=10; //
-int d6=11; //
-int d7=12; //
-LiquidCrystal lcd(rs,en,d4,d5,d6,d7); //
+#include "DHT.h" //include the file "DHT.h" in the program
+#define Type DHT11 //declaring the DHT11 as a constant value
+#include <LiquidCrystal.h> //include the file "LiquidCrystal.h" in the program
+int rs=7; //rs of LCD connects to pin7 of Arduino
+int en=8; //en of LCD connects to pin8 of Arduino
+int d4=9; //d4 of LCD connects to pin9 of Arduino
+int d5=10; //d5 of LCD connects to pin10 of Arduino
+int d6=11; //d6 of LCD connects to pin11 of Arduino
+int d7=12; //d7 of LCD connects to pin12 of Arduino
+LiquidCrystal lcd(rs,en,d4,d5,d6,d7); //setting the pins of the LCD
  
-int sensePin=2; //
+int sensePin=2; //setting sensePin as equivalent to pin2 of Arduino
 DHT HT(sensePin,Type); //
-float humidity; //
-float tempC; //
-float tempF; //
-int setTime=500; //
-int dt=1000; //
+float humidity; //define the humidity value
+float tempC; //define the tempC value
+float tempF; //define the tempF value
+int setTime=500; //declares that setTime is equivalent to 500
+int dt=1000; //declares that dt is equivalent to 1000
  
-void setup() { // put your setup code here, to run once:
-Serial.begin(9600); //
-HT.begin(); //
-delay(setTime); //
-lcd.begin(16,2); //
- 
-}
- 
-void loop() { //
-humidity=HT.readHumidity(); //
-tempC=HT.readTemperature(); //
-tempF=HT.readTemperature(true); //
- 
-lcd.setCursor(0,0); //
-lcd.print("Temp F= "); //
-lcd.print(tempF); //
-lcd.setCursor(0,1); //
-lcd.print("Humidity= "); //
-lcd.print(humidity); //
-lcd.print(" %"); //
-delay(500); //
-lcd.clear(); //
- 
-Serial.print("Humidity: "); //
-Serial.print(humidity); //
-Serial.print("% Temperature "); //
-Serial.print(tempC); //
-Serial.print(" C "); //
-Serial.print(tempF); //
-Serial.println(" F "); //
+void setup() { // put your setup code to run once:
+Serial.begin(9600); //sets Serial Monitor to do 9600 bits per second
+HT.begin(); //starts the dht11 sensor 
+delay(setTime); //delay 500
+lcd.begin(16,2); //print in column 16,row 2
  
 }
+ 
+void loop() { //put your setup code to run on loop:
+humidity=HT.readHumidity(); //dht11 read humidity value equal to humidity
+tempC=HT.readTemperature(); //dht11 read temp value equal to tempC
+tempF=HT.readTemperature(true); //dht11 tempF value equal to tempF
+ 
+lcd.setCursor(0,0); //sets where the values will be located
+lcd.print("Temp F= "); //prints in the LCD
+lcd.print(tempF); //prints in the LCD the value
+lcd.setCursor(0,1); //sets where the values will be located
+lcd.print("Humidity= "); //prints in the LCD
+lcd.print(humidity); //prints in the LCD the value
+lcd.print(" %"); //prints in the LCD
+delay(500); //delay 500
+lcd.clear(); //clear LCD
+ 
+Serial.print("Humidity: "); //prints in Serial Monitor
+Serial.print(humidity); //prints the value in SM
+Serial.print("% Temperature "); //prints in Serial Monitor
+Serial.print(tempC); //prints the value in SM
+Serial.print(" C "); //prints in Serial Monitor
+Serial.print(tempF); //prints the value in SM
+Serial.println(" F "); //prints in the Serial Monitor
+ 
+}
+
