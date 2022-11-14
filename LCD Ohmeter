@@ -1,27 +1,35 @@
-#include <LiquidCrystal.h> 
+/* The goal of this program is to make a digital ohmmeter. 
+ * In this program, the same process as a digital voltmeter 
+ * will be done. The Analog pins from the Arduino will be
+ * used and the Analog Digital Converter(ADC) and the 
+ * built-in libraries for this program. The main theme 
+ * in this program is learning how to use the built-in
+ * libraries in the Arduino UNO software.
+ * 
+ */
+#include <LiquidCrystal.h> //include the file "LiquidCrystal.h" in the program
 
-int Vpin=A5;
-float resistance; 
-float ohms;
-const int rs = 9, en = 8, d4 = 7, d5 = 6, d6 = 5, d7 = 4;
-LiquidCrystal lcd(9, 8, 7, 6, 5, 4);
+int Opin=A5;//declare Opin as pin connected to Analog pin5
+float resistance;//declare value of resistance in decimal form
+float ohms;// declare value of ohms in decimal form
+const int rs = 9, en = 8, d4 = 7, d5 = 6, d6 = 5, d7 = 4;//sets pins on LCD to their corresponding pin in the Arduino UNO board
+LiquidCrystal lcd(9, 8, 7, 6, 5, 4);//declares the pins of the LCD
 
-void setup() {
+void setup() { //runs the codes once
   
-  Serial.begin(9600);
-  lcd.begin(16,2);
+  Serial.begin(9600);//start printing on SM at 9600bits/sec
+  lcd.begin(16,2);//prints on LCD column 16, row 2
   
 }
 
-void loop() {
+void loop() { //runs the codes on loop
   
-  resistance = analogRead(Vpin);
-  ohms = resistance/1023*5.0; 
-  Serial.println(ohms);
-  lcd.setCursor(0,1);
-  lcd.print("resistance = ");
-  lcd.print(ohms);
-  delay(1000);
-  lcd.clear();
-
+  resistance = analogRead(Opin);//sets resistance equals to what the A5 value will give
+  ohms = resistance/1023*5.0;//sets ohms equal to the value read by the A5 divided by 5
+  Serial.println(ohms);//print in SM the value of ohms
+  lcd.setCursor(0,1);//sets where the values will be located in the LCD
+  lcd.print("resistance = ");//print in the LCD
+  lcd.print(ohms);//print the value in the LCD
+  delay(1000);//delay 1000ms
+  lcd.clear();//clear the LCD
 }
