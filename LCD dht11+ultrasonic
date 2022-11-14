@@ -1,0 +1,52 @@
+/*
+*/
+#include <dht.h> //
+#define Type DHT11 //
+#include <LiquidCrystal.h> //
+
+#define trigPin 6 //
+#define echoPin 13 //
+#define DHT11_PIN 2 //
+
+int rs=7; //
+int en=8; //
+int d4=9; //
+int d5=10; //
+int d6=11; //
+int d7=12; //
+LiquidCrystal lcd(rs,en,d4,d5,d6,d7); //
+ 
+dht DHT; //
+
+void setup() { //
+  pinMode(trigPin, OUTPUT); //
+  pinMode(echoPin, INPUT); //
+}
+
+void loop() { //
+  
+  float duration, distance; //
+  float speed; //
+  
+  digitalWrite(trigPin, LOW); //
+  delayMicroseconds(2); //
+  digitalWrite(trigPin, HIGH); //
+  delayMicroseconds(10);  //
+  digitalWrite(trigPin, LOW); //
+  
+  duration = pulseIn(echoPin, HIGH); //
+  speed = 331.4 + (0.606 * DHT.temperature) + (0.0124 * DHT.humidity); //
+  distance = (duration / 2) * (speed / 10000); //
+  
+  if (distance >= 400 || distance <= 2){ //
+     lcd.print("Out of range"); //
+    delay(500); //
+  }
+   else { //
+    lcd.print(distance); //
+    lcd.print(" cm"); //
+    delay(500); //
+  }
+  delay(500); //
+  lcd.clear(); //
+}
