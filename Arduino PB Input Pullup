@@ -1,22 +1,27 @@
 /* This program is used to read the value of a Push Button using the Serial Monitor in Arduino UNO.
- * The value of the Push Button when there is no resistance is unstable, reason why we need a resistor; to have a specific value.
- * The main theme of this program is digitalRead.
-*/
+ * The value of the Push Button when there is no resistance is unstable and it will give either 0 when
+ * it is not receiving any voltage or 1 if it is receiving the 5V from the Arduino UNO board. That is 
+ * the reason why we need to put a resistor either by pullup or pulldown; to have a specific and fixed
+ * value. In the Arduino UNO, there are already built-in resistors that can be activated by using the 
+ * command INPUT_PULLUP which is the main theme of this program as well.
+ */
 
 int Push_Button = 8; //indicate that pin 8 is connected to the pushbutton
 
-void setup(){ // setup the code once
+void setup(){ //run the code once
   
-  pinMode(Push_Button,INPUT_PULLUP); //indicates that pin8 is an input
+  pinMode(Push_Button,INPUT_PULLUP); //activates the INPUT_PULLUP in the arduino board
+                                     //INPUT_PULLUP is the pullup resistor built inside
+                                     
   Serial.begin(9600); //open the serial port at 9600 bps
   
 }
 
 int PbState = digitalRead(8); //read value of the pushbutton
 
-void loop(){ //setup the code on loop
+void loop(){ //run the code on loop
   
-  Serial.println(PbState);
+  Serial.println(PbState); //prints the read value of the pushbutton
   
 }
   
