@@ -1,0 +1,63 @@
+/* This program is use to control a Servo Motor using an LDR or a 
+ * Light Dependent Resitor. This resistors' resistance changes when 
+ * it is being exposed to light and this will be the one that we will 
+ * use to control the Servo Motors' direction with, but only on certain 
+ * directions. The main theme of this program is knowing how to add a library 
+ * and use it like: Defining a servos' name using "Servo" and using Servo.attach()
+ * and Servo.write().
+ */
+
+#include <Servo.h> // Includes library for Servo Motor
+
+int potpin=0;      // Initialize analog pin 0, connected with LDR; integer values
+int ledpin=13;     // Initialize digital pin 13, output regulating the brightness of LED; integer values
+int val=0;         // Initialize variable val; integer values
+int Vpin=A5;       // States that Vpin is connected to analog 5 pin; integer values
+
+float voltage;     // Voltage is a decimal value
+float volts;       // Volts is a decimal value
+
+Servo myServo;     // Define servo name
+ 
+
+void setup(){  // Run the code once
+
+pinMode(ledpin,OUTPUT); // Set digital pin 13 as “output”
+
+Serial.begin(9600);     // Set baud rate at “9600”
+
+myServo.attach(3);      // Servo is attached to pin3 of arduino
+myServo.write(0);       // Servo sets the acquired value from A0 as an output; start position
+
+} // End of setup
+
+
+void loop(){ // Run the code on loop
+
+voltage = analogRead(Vpin); // Reads the analog value from pin A5 and assign it to voltage
+volts= voltage/1023*5.0;    // Reads the value from voltage and calculates it; calculated value assigned it to volts
+
+Serial.println("Voltage ="); // Prints on serial monitor vertically
+Serial.println(volts);       // Prints on serial monitor vertically
+
+val=analogRead(potpin); // ReadS the analog value of the ldr and assign it to val
+
+Serial.println("Resistance ="); // Prints on serial monitor vertically
+Serial.println(val);            // Prints vertically the value of val
+
+analogWrite(ledpin,val); // turn on the LED and set up brightness（maximum output value 255）
+
+delay(1000); // wait for 1000ms
+
+if(val>250) // If val is greater than 250
+ { 
+   myServo.write(180); // Light goes up, (val>250), servo turns 180 degrees
+
+ }
+
+else // If the first one is not the case, this function will run
+ {
+   myServo.write(0); // Low light level, turns to opposite side; back to 0 degrees
+ }
+
+} // End of loop
