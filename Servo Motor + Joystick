@@ -1,1 +1,54 @@
+/* This program is used to control the Servo Motor using a joystick, an input device 
+ * consisting of a stick that pivots on a base and reports its angle or direction to 
+ * the device it is controlling. In this program, we will be able to control the direction
+ * of the Servo Motor in the X-axis. The main theme of it is knowing how to add a Library
+ * and use it and learning how to use the servo.attach() and servo.write() functions.
+ */
+ 
+#include <Servo.h> // Includes the Library for Servo Motors
 
+Servo Xservo; // Declares that the servo will move in an X-axis way
+ 
+int Xpin=A0; // Assign the Xpin from the Joystick to A0 of Arduino; integer value
+int Spin=2;  // Assign the Servo pin of Joystick to pin2 of Arduino; integer value
+int XSpin=9; // Assign the XServo pin of Joystick to pin 9 of Arduino; integer value
+int WVx;     // Write Value for Servo X; Calculates the angle; integer value
+int Xval;    // States that X value is an integer
+int Sval;    // States that the value of the Servo is an integer
+int dt=200;  // Sets the delay time as 200ms
+
+void setup() { // Run code once
+  
+Serial.begin(9600); // Starts serial communication at 9600 bauds rate
+
+pinMode(Xpin,INPUT);   // Sets Xpin as an input
+pinMode(Spin,INPUT);   // Sets Spin as an input
+pinMode(XSpin,OUTPUT); // Sets Xpin as an output
+
+Xservo.attach(XSpin); // XServo variable attaches to pin9 (Xspin), where the servo is connected
+
+digitalWrite(Spin,HIGH); // Servo pin set as HIGH; Turn on the Servo pin; 
+
+} // End of setup
+ 
+void loop() { // Run code on loop
+  
+ Xval=analogRead(Xpin);  // Assign Xval as the analog value read from the Xpin(A0)
+ WVx=(180./1023.)*Xval;  // Assign WVx as the answer from the needed computation to get the angle
+ Sval=digitalRead(Spin); // Assign Sval as the digital value read from Servo pin(2)
+ 
+ 
+ Xservo.write(WVx); // Writes the calculated value from Wvx; Sets it as an output
+ 
+ delay(dt); // Delay time
+ 
+ Serial.print("X Value = "); // Prints in serial monitor 
+ 
+ Serial.print(Xval); // Prints the acquired value from analogRead; from pin A0
+ 
+ Serial.print(" Switch State is "); // Prints in Serial Monitor
+ 
+ Serial.println(Sval); // Prints the acquired value from digital Read; from pin 2 
+ 
+
+} // End of loop
