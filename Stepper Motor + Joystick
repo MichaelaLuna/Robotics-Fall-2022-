@@ -1,0 +1,81 @@
+/* This program is use to control a Stepper motor using a joystick.
+ * A joystick is an electronic component that translate the stick's 
+ * position on two axes — the X-axis(left to right) and the Y-axis 
+ *(up and down) into electronic information an Arduino can process.
+ * With the help of this program we would be able not to only control
+ * the direction of the Stepper motor but also its speed. The main
+ * theme of this program is to learn how to add a library and use it like:
+ * Using "Stepper" to name variables also commands like stepper.setSpeed()
+ * and stepper.step(). Also, to learn how to use commands like if(), else() 
+ * and while().
+ */
+
+#include <Stepper.h> // Include Arduino stepper motor library
+ 
+#define STEPS 32 // Define number of steps per revolution
+ 
+#define IN1  11 // Define pin IN1 from stepper motor as pin11 from Arduino
+#define IN2  10 // Define pin IN2 from stepper motor as pin10 from Arduino
+#define IN3   9 // Define pin IN3 from stepper motor as pin 9 from Arduino
+#define IN4   8 // Define pin IN4 from stepper motor as pin 8 from Arduino
+ 
+Stepper stepper(STEPS, IN4, IN2, IN3, IN1); // Initialize Stepper Motor library; Name the stepper
+ 
+#define joystick  A0 // Define joystick as pot output; connected to Arduino A0
+ 
+void setup(){  // Run the code once
+
+} // End of setup
+ 
+void loop(){  // Run the code on loop
+  
+  int val = analogRead(joystick);  // Sets val as the read analog value from the joystick
+ 
+  if(  (val > 500) && (val < 523) ) // First case: If read value is greater than 500 but less than 523 &
+                                    // If the joystick is in the middle;
+                                    // Stop the motor
+   {
+    digitalWrite(IN1, LOW); // Stops the IN1 of stepper motor
+    digitalWrite(IN2, LOW); // Stops the IN2 of stepper motor
+    digitalWrite(IN3, LOW); // Stops the IN3 of stepper motor
+    digitalWrite(IN4, LOW); // Stops the IN4 of stepper motor
+   }
+ 
+  else // If the first if is not the case, then do:
+    {
+    
+    while (val >= 523) // Run this code until condition from first case is met
+                       // If read value is greater than or equal 523 then;
+                       // Move the motor in the first direction
+                   
+    {
+     
+      int speed_ = map(val, 523, 1023, 5, 500); // Set max and min then converts
+                                                // Map the speed between 5 and 500 rpm; integer value
+      
+      stepper.setSpeed(speed_); // Set motor speed
+ 
+      stepper.step(1); // Move the motor; 1 step
+ 
+      val = analogRead(joystick); // Assign the val as the analog value read from the joystick
+    }
+ 
+    while (val <= 500) // Run this code until condition from first case is met
+                       // If read value is less than or equal to 500 then;
+                       // Move the motor in the other direction
+    {
+      
+      int speed_ = map(val, 500, 0, 5, 500); // Set max and min then converts
+                                             // Map the speed between 5 and 500 rpm; integer value
+      
+      stepper.setSpeed(speed_); // Set motor speed
+ 
+      stepper.step(-1);  // Move the motor; 1 step
+ 
+      val = analogRead(joystick); // Assign the val as the analog value read from the joystick
+    }
+ 
+  } 
+  
+} // End of loop
+ 
