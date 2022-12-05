@@ -1,0 +1,66 @@
+/* This program is used to control a Stepper motor using an IRremote. 
+ * InfraRed remote control or IRremote is an electronic wireless device 
+ * used to operate within a room using light signals in the infrared(IR) 
+ * range, so it requires line of sight to its destination. The main theme 
+ * o this program is to know how to add a library and use the components 
+ * within it like: decode_results, irrecv.enableIRIn(), irrecv.decode() and
+ * irrecv.resume(). Also, the commands if() and switch()then case.
+ */
+  
+#include <Stepper.h>  // Include Stepper Library
+#include <IRremote.h> // Include IRremote Library
+
+#define STEPS  32     // Define number of steps per revolution of Internal shaft; which is 32
+
+int  Steps2Take;      // 2048 = 1 Revolution; intiger value
+int receiver = 6;     // Signal Pin of IR receiver is connected to pin 6 of Arduino 
+
+#define IN1 8  // IN1 of stepper motor is connected to pin8 of Arduino
+#define IN3 10 // IN3 of stepper motor is connected to pin10 of Arduino
+#define IN2 9  // IN2 of stepper motor is connected to pin9 of Arduino
+#define IN4 11 // IN4 of stepper motor is connected to pin11 of Arduino
+
+
+Stepper small_stepper(STEPS, IN1, IN3, IN2, IN4); //Initialize Stepper Motor library; Name the stepper
+
+IRrecv irrecv(receiver);    // Create the receiver object; I chose 'irrecv'
+decode_results results;     // Decode Xresults from the IRremote; 
+
+void setup(){ // Run the code once
+  
+  irrecv.enableIRIn(); // Start the receiver
+  
+} // End of setup
+
+void loop(){ // Run the code on loop
+  
+if (irrecv.decode(&results)) // First case: Have we received an IR signal?
+
+  {
+    switch(results.value) // If yes, we'll go to cases:
+
+    {
+
+      case 0xFF30CF: // case 1: #1 button pressed, code of #1 button is 0xFF30CF
+                      small_stepper.setSpeed(500); // Set up speed
+                      Steps2Take  =  2048;  // Rotate clockwise; positive value
+                      small_stepper.step(Steps2Take); //Make the parts of the stepper to rotate
+                                                      // But according to the value assigned to Steps2Take
+                      delay(2000); // Delay 2000ms
+                      break; // Tell Arduino to go on
+
+      case 0xFF18E7: // case 2: #2 button pressed, code of #2 button is 0xFF18E7
+                      small_stepper.setSpeed(500); // Set up speed
+                      Steps2Take  =  -2048;  // Rotate counter clock wise; negative value
+                      small_stepper.step(Steps2Take); // Make the parts of the stepper to rotate 
+                                                      // But according to the value assigned to Steps2Take
+                      delay(2000); // Delay 2000ms
+                      break; // Tell Arduino to go on
+                      
+    }
+    
+      irrecv.resume(); // receive the next value
+  }  
+
+
+} // End of loop
