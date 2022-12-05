@@ -10,7 +10,7 @@
 Servo Xservo; // Declares that the servo will move in an X-axis way
  
 int Xpin=A0; // Assign the Xpin from the Joystick to A0 of Arduino; integer value
-int Spin=2;  // Assign the Servo pin of Joystick to pin2 of Arduino; integer value
+int Spin=2;  // Assign the SW pin of Joystick to pin2 of Arduino; integer value
 int XSpin=9; // Assign the XServo pin of Joystick to pin 9 of Arduino; integer value
 int WVx;     // Write Value for Servo X; Calculates the angle; integer value
 int Xval;    // States that X value is an integer
