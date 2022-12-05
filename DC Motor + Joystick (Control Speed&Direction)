@@ -1,0 +1,55 @@
+/* This program is use to control a DC Motor using a joystick. A joystick is an 
+ * electronic component that translate the stick's position on two axes — the X-axis 
+ *(left to right) and the Y-axis (up and down) into electronic information an Arduino 
+ * can process. Although, in the hardware of this program, we also use the L293D motor
+ * controller and not only the two first components. The main theme of this program is 
+ * digitalWrite(), analogWrite(), pinMode()and using the conditional statement if().
+ */
+ 
+int speedPin=5; // Initialize speedPin, Enable 1&2 of L293D, connected to Arduino pin5; integer value
+int dir1=4;     // Initialize dir1, Input1 of L293D, connected to Arduino pin4; integer value
+int dir2=3;     // Initialize dir2, Input2 of L293D, connected to Arduino pin3; integer value
+int mSpeed;     // Sets mSpeed as an integer value
+int jPin=A1;    // Initialize the joystick signal pin; connected to pin A1 of arduino UNO
+int jVal;       // Sets jVal as an integer value
+ 
+void setup() { // Run the code once
+  
+pinMode(speedPin,OUTPUT); // Set speedPin (pin5) as an output
+pinMode(dir1,OUTPUT);     // Set dir1 (pin4) as an output
+pinMode(dir2,OUTPUT);     // Set dir2 (pin3) as an output
+pinMode(jPin,INPUT);      // Set jPin (pinA1) as an input
+
+Serial.begin(9600); // Starts serial monitor and sets baud rate at 9600
+ 
+} // End of setup
+ 
+void loop() { // Run the code on loop
+  
+jVal=analogRead(jPin); // Sets jVal as the value read from jPin(pin A1)
+ 
+Serial.println(jVal); // Prints vertically the read value jVal
+
+if (jVal<512){ // First case: If value of jVal is less than 512, this is the action:
+  
+digitalWrite(dir1,LOW);  // Turns off the dir1; Control direction
+digitalWrite(dir2,HIGH); // Turns on the dir2; Control direction
+
+
+mSpeed=-255./512.*jVal+255.;  // Calculation for mSpeed
+analogWrite(speedPin,mSpeed); // Speedpin (Pin 5), produce an output and output depends from the calculated value of mSpeed
+                              // This controls speed
+ }
+
+if(jVal>=512){ // Second case: If value of jVal is greater than 512, this is the action:
+  
+digitalWrite(dir1,HIGH); // Turn on dir1; Control direction
+digitalWrite(dir2,LOW);  // Turn off dir2; Control direction
+
+mSpeed=(255./512.)*jVal-255.; // Calculation for mSpeed
+analogWrite(speedPin,mSpeed); // Speedpin (Pin 5), produce an output and output depends from the calculated value of mSpeed
+                              // This controls speed
+ }
+
+} // End of loop
+ 
