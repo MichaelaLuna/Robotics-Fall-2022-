@@ -57,10 +57,11 @@ void loop() { // Run the code on loop
                       Stop(); // Call Function 
                       break; // Tell Arduino to go on
       
-    }
+    } // End of cases
     
       irrecv.resume(); // Receive the next value
-  }
+      
+  } // End of "if"
  
   
 } // End of loop
