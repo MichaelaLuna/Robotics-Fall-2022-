@@ -9,9 +9,7 @@ Servo myservo; // Set servo as an object to control the servo
 
 int echoPin = 12; // Echo pin of the ultrasonic connected to pin 12 of arduino
 int trigPin = 13; // Trig pin of the ultrasonic connected to pin 13 of arduino
-int middleD; // Set value from middleD as an integer
-int rightD; // Set value from rightD as an integer
-int leftD; // Set value from leftD as an integer
+int middleD = 0, rightD = 0, leftD = 0; // Set value from middleD, rightD and leftD as an integer
 
 #define MotorA 7 // Initialize motor A1N1 to pin 7 of arduino
 #define MotorB 8 // Initialize motor B1N1 to pin 8 of arduino
@@ -107,17 +105,23 @@ int distanceComputation() { // Computation for the distance
 }  
 
 void setup() { // Run the code once
+  
   for(int i=1; i<9; i++){ // Setup the pins 
      pinMode(i, OUTPUT); // Set these pins as an output
   }
+  
   pinMode(EnablePin, OUTPUT); // Set the enable pin ("Stby") as an ouput
+  
   myservo.attach(11); // Signal pin of servo connected to pin 11 of arduino
+  
   pinMode(echoPin, INPUT); // Set the echo pin as an input
   pinMode(trigPin, OUTPUT); // Set the trig pin as an output
+  
   Stop(); // Tell the Car Robot not to move yet
 }
 
 void loop() { //Run code on loop
+  
  myservo.write(90);  // Set/Turn servo at 90 Degrees position
     delay(300); // Delay for 300ms
     
@@ -131,7 +135,7 @@ void loop() { //Run code on loop
        
       rightD = distanceComputation(); // Set the two to have equal values
       
-      delay(300); // Delay for 300ms  
+      delay(300); // Delay for 500ms  
       myservo.write(90);  // Set/Turn servo at 90 Degrees position           
       delay(1000); // Delay for one second                                                      
       myservo.write(180); // Set/Turn servo at 180 Degrees position                
@@ -145,20 +149,23 @@ void loop() { //Run code on loop
       
       if(rightD > leftD) { // If value of right distance is greater than left distance then:
         Right(); // Turn right
-        delay(300); // Delay for 300ms 
+        delay(350); // Delay for 300ms 
       }
       else if(rightD < leftD) {
         Left(); // Turn left
-        delay(300); // Delay for 300ms 
+        delay(350); // Delay for 300ms 
       }
-      else if((rightD <= 15) && (leftD <= 15)) {
+      else if((rightD <= 15) || (leftD <= 15)) {
         Backward(); // Turn backward
-        delay(150); // Delay for 150ms 
+        delay(175); // Delay for 150ms 
       }
       else { // If that's not the case:
         Forward(); // Go forward
       }
-    
+        }
+      else { // If that's not the case:
+        Forward(); // Go forward
+       }
 } // End of loop
 
 
