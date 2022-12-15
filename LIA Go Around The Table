@@ -16,7 +16,7 @@ void setup() { // Run the code once
  pinMode(EnablePin, OUTPUT); // Set the enable pin ("Stby") as an ouput
 }
 
-void loop() { // put your main code here, to run repeatedly:
+void loop() { // Run the code on loop
   digitalWrite(EnablePin,HIGH); // Set enable pin ("Stby") as 1 to turn on
   Stop(); // Call the function Stop to stop the Car
   delay(3000); // Delay for 3secs
