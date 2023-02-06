@@ -5,41 +5,38 @@ Using the command delay to have a time delay during the blinking of RGB LED whic
 The main theme is digitalWrite.
 */
 
-int time_delay = 1000; // time_delay be equal to 1000ms so can be use to replace in the next command instead of 1000
-void setup(){ // setup code to run once 
+int time_delay = 1000; // Time_delay be equal to 1000ms so can be use to replace in the next command instead of 1000
+int Red = 12; // Pin 12 is connected to the first strip of RGB led which will produce color red
+int Green = 11; // Pin 11 is connected to the third strip of RGB led which will produce color green
+int Blue = 10; // Pin 10 is connected to the fourth strip of RGB led which will produce color blue
 
-  pinMode(12,OUTPUT);  // pin 12 is an output
-  pinMode(11,OUTPUT);  // pin 11 is an output
-  pinMode(9,OUTPUT);  // pin 9 is an output
+
+void setup(){ // Setup code to run once 
+
+  pinMode(Red,OUTPUT);  // Pin 12 is an output
+  pinMode(Green,OUTPUT);  // Pin 11 is an output
+  pinMode(Blue,OUTPUT);   // Pin 10 is an output
   
 }
 
-void loop(){ // setup code to run repeatedly 
+void loop(){ // Setup code to run repeatedly 
  
-  digitalWrite(12,HIGH);// LED turns on 
-    delay(time_delay);  // wait for a second 
+  digitalWrite(Red,HIGH);// LED turns on 
+    delay(time_delay);   // Wait for a second 
   
-  digitalWrite(12,LOW); // LED turns off
-    delay(time_delay);  // wait for second 
+  digitalWrite(Red,LOW); // LED turns off
+    delay(time_delay);   // Wait for second 
   
-   digitalWrite(11,HIGH);// LED turns on 
-    delay(time_delay);  // wait for a second 
+   digitalWrite(Green,HIGH);// LED turns on 
+    delay(time_delay);      // Wait for a second 
   
-  digitalWrite(11,LOW); // LED turns off
-    delay(time_delay);  // wait for second 
+  digitalWrite(Green,LOW); // LED turns off
+    delay(time_delay);     // Wait for second 
   
-   digitalWrite(10,HIGH);// LED turns on 
-    delay(time_delay);  // wait for a second 
+   digitalWrite(Blue,HIGH); // LED turns on 
+    delay(time_delay);    // Wait for a second 
   
-  digitalWrite(10,LOW); // LED turns off
-    delay(time_delay);  // wait for second 
-  
-   digitalWrite(9,HIGH);// LED turns on 
-    delay(time_delay);  // wait for a second 
-  
-  digitalWrite(9,LOW); // LED turns off
+  digitalWrite(Blue,LOW); // LED turns off
     delay(time_delay);  // wait for second 
  
 }
-  
-  
