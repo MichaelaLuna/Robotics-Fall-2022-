@@ -1,0 +1,63 @@
+/* This program is used to create a Color Selector in RGB LED using the Arduino UNO Board. 
+   Connecting the RGB LED to pin 12,11 and 10 to control it. An RGB led is a combination of 
+   three LEDs in just one package: red, green and blue but that does not limit RGBs attributes.
+   This electronic component has various ways to produce various amount of colors although it
+   only has three main colors. This three main colors' values can be range to 0-255 and that 
+   range can be mix and that can produce almost every type of color. The goal of this program
+   is to learn how to create our own function & learn how to call it when we need it and also 
+   to learn when to use the analogWrite, like in this situation, where the brightness can be 
+   controlled only by an analog sigal for this means range.
+*/
+
+
+int Red = 12;   // Set strip of RGB as color red and pin 12
+int Blue = 11;  // Set strip of RGB as color blue and pin 11
+int Green = 10; // Set strip of RGB as color green and pin 10
+
+void setup(){ // Setup code to run once
+  
+  pinMode(Red,OUTPUT);   // Set Red as an output
+  pinMode(Blue,OUTPUT);  // Set Blue as an output
+  pinMode(Green,OUTPUT); // Set Green as an output
+  
+}
+
+void loop() { // Setup code to run on loop
+  
+setColor(255, 0, 0); // Call the setColor function
+                     // Set 255 for the first one to turn on the color red
+   delay(1000);      // Delay for 1 second
+
+setColor(0, 255, 0); // Call the setColor function
+                     // Set 255 for the second one to turn on the color green
+   delay(1000);      // Delay for 1 second
+
+setColor(0, 0, 255); // Call the setColor function
+                     // Set 255 for the third one to turn on the color blue
+   delay(1000);      // Delay for 1 second
+  
+  
+setColor(255, 255, 0); // Call the setColor function
+                       // Set 255 for the red & green to turn on the color yellow
+   delay(1000);        // Delay for 1 second
+
+setColor(255, 0, 255); // Call the setColor function
+                       // Set 255 for the red & blue to turn on the color purple
+   delay(1000);        // Delay for 1 second
+
+setColor(0, 255, 255); // Call the setColor function
+                       // Set 255 for the green & blue to turn on the color aqua
+   delay(1000);        // Delay for 1 second
+
+
+} // End of loop
+
+
+void setColor(int red, int green, int blue) { // Function "setColor" initializing red, green & blue
+                                              //use PWM to controlt the brightness of the RGB LED
+                                              
+analogWrite(Red, red);     // Writes analog value (PWM wave) to Red
+analogWrite(Green, green); // Writes analog value (PWM wave) to Green
+analogWrite(Blue, blue);   // Writes analog value (PWM wave) to Blue
+
+}
