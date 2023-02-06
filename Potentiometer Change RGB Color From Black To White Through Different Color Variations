@@ -1,0 +1,77 @@
+/* The goal of this program is to do a Color Selector in RGB LED using the Arduino UNO Board
+   but with the help of a potentiometer, which is a manually adjustable variable resistor 
+   with 3 terminals and an RGB led is a combination of three LEDs in just one package: red, 
+   green and blue but that does not limit RGBs attributes. This electronic component has can 
+   produce various amount of colors for its three main colors' values can be range to 0-255 and that 
+   range can be mix and that can produce almost every type of color. Using the potentiometer,
+   we would be able to control the voltage going in the circuit and change the colors in the RGB 
+   as a result from the movement of the potentiometers' wiper. The theme of this is to know how
+   to use the analogRead() and analogWrite(), to know how to create your own function and know
+   how to call it and lastly how to use the if else() function.
+ */
+ 
+int Red = 12;   // Set strip of RGB as color red and pin 12
+int Blue = 11;  // Set strip of RGB as color blue and pin 11
+int Green = 10; // Set strip of RGB as color green and pin 10
+int potentiometer = A5; // Set the potentiometer connected to pin A5 of Arduino
+
+void setup(){ // Setup code to run once
+  
+  pinMode(Red,OUTPUT);   // Set Red as an output
+  pinMode(Blue,OUTPUT);  // Set Blue as an output
+  pinMode(Green,OUTPUT); // Set Green as an output
+  
+  pinMode(potentiometer,INPUT); // Set potentiometer as an input
+  
+  Serial.begin(9600);     // Open serial monitor at 9600 baud rate
+  
+}
+
+void loop() { // Setup code to run on loop
+
+  int bitValue = analogRead(potentiometer); // Set bit value equal to the read value from A0
+  float voltageValue = bitValue*(5.0/1023.0); // Set voltage value equal to the calculated value from the calculation
+
+  Serial.print("Voltagevalue ="); // Print on serial monitor
+  delay(1000);                    // Delay for 1 second
+  Serial.println(voltageValue);   // Print on SM the read voltage value
+  delay(1000);                    // Delay for 1 second
+
+  if(bitValue < 204.8)  // If 204.8 is greater than the read value from the potentiometer then do this:
+   {
+   setColor(0, 0, 0); // Call the setColor function
+                      // Set 0 for all three to turn on the color black/transparent
+   }
+  else if (bitValue < 409.6)  // If 409.6 is greater than the read value from the potentiometer then do this:
+   {
+   setColor(255, 255, 0); // Call the setColor function
+                          // Set 255 for the red & blue to turn on the color purple
+   }
+  else if (bitValue < 614.4) // If 614.4 is greater than the read value from the potentiometer then do this:
+   {
+   setColor(0, 255, 255); // Call the setColor function
+                          // Set 255 for the blue & green to turn on the color aqua
+   }
+  else if (bitValue < 819.2)  // If 819.2 is greater than the read value from the potentiometer then do this:
+   {
+    setColor(255, 0, 255); // Call the setColor function
+                           // Set 255 for the red & green to turn on the color yellow
+   }
+    else if (bitValue < 1024) // If 1024 is greater than the read value from the potentiometer then do this:
+  {
+    setColor(255, 255, 255); // Call the setColor function
+                            // Set 255 for all three to turn on the color white
+  }
+
+
+} // End of loop
+
+
+void setColor(int red, int green, int blue) { // Function "setColor" initializing red, green & blue
+                                              // Use PWM to controlt the brightness of the RGB LED
+
+analogWrite(Red, red);     // Writes analog value (PWM wave) to Red
+analogWrite(Green, green); // Writes analog value (PWM wave) to Green
+analogWrite(Blue, blue);   // Writes analog value (PWM wave) to Blue
+
+}
