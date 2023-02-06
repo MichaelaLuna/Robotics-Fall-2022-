@@ -1,0 +1,52 @@
+/* The goal of this program is to turn on and off a 
+   light emitting diode (LED)connected to a digital pin
+   from the Arduino UNO, without using the delay() function 
+   which means that other code can run at the same time 
+   without being interrupted by the LED code and to also 
+   show the value of a pushbutton wether it is on 1(ON) or
+   0(OFF). The theme of this program is about the using of
+   const int, unsigned long, const long and the if else().
+*/
+
+const int Green = 4;  // Green is connected to pin 4 of Arduino, constants won't change
+
+int ledState = LOW;  // LedState used to set the LED
+                     // Unlike constants, int will change
+int PB = 2;          // PB connected to pin 2 of Arduino
+
+unsigned long previousMillis = 0;  // Store last time LED was updated
+                                   // Used for variables that hold time
+                                   // Value will be large "int" cant store it
+
+const long interval = 1000;  // Interval at which to blink, 1second
+
+void setup() { // Run code once
+  
+  pinMode(Green, OUTPUT); // Set Green as an output
+  pinMode(PB, INPUT); // Set PB as an input
+  Serial.begin(9600); // Open serial monitor at 9600 bauds rate
+}
+
+void loop() { // Run code in loop
+
+  int buttonState = digitalRead(PB); // Set buttonstate equal to the value read from the PB
+  Serial.print("PB ="); // Print in serial monitor
+  Serial.println(buttonState); // Print the value read by the PB and print on SM
+ 
+  unsigned long currentMillis = millis(); // Check if its time to blink the LED
+
+  if (currentMillis - previousMillis >= interval) { // If the difference between current time &
+                                                    // last time I blinked the LED is bigger than
+                                                    // the interval at which I want to blink the LED
+                                                    
+    previousMillis = currentMillis;  // Save the last time I blinked the LED
+  
+    if (ledState == LOW) { // If the LED is off;
+      ledState = HIGH;     // Turn it on
+    } else {               // If not;
+      ledState = LOW;      // Turn it off;
+    }
+    
+    digitalWrite(Green, ledState); // Set Greens' output depending with the value from the ledState
+  }
+}
