@@ -1,9 +1,9 @@
 /* This program is used to read the value of a Push Button using the Serial Monitor in Arduino UNO.
- * The value of the Push Button when there is no resistance is unstable and it will give either 0 when
- * it is not receiving any voltage or 1 if it is receiving the 5V from the Arduino UNO board. That is 
- * the reason why we need to put a resistor either by pullup or pulldown; to have a specific and fixed
- * value. In the Arduino UNO, there are already built-in resistors that can be activated by using the 
- * command INPUT_PULLUP which is the main theme of this program as well.
+   The value of the Push Button when there is no resistance is unstable and it will give either 0 when
+   it is not receiving any voltage or 1 if it is receiving the 5V from the Arduino UNO board. That is 
+   the reason why we need to put a resistor either by pullup or pulldown; to have a specific and fixed
+   value. In the Arduino UNO, there are already built-in resistors that can be activated by using the 
+   command INPUT_PULLUP which is the main theme of this program as well.
  */
 
 int Push_Button = 8; //indicate that pin 8 is connected to the pushbutton
