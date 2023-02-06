@@ -1,0 +1,86 @@
+/* The goal of this program to control five LEDs with the help of a 
+ * potentiometer. A potentiometer is a three-terminal resistor with 
+ * a wiper that acts as an adjustable voltage divider. Using the Arduino
+ * UNO board and the pin A0 from it, we would be able to control which
+ * light we want to turn on with these five LEDs; either turning them
+ * all at the same time or if we want the inverse of it. The theme of this
+ * is learning how to use the analogRead(), how to convert the bit value to
+ * a voltage value and how to use the conditional statement if else().
+ */
+
+int potentiometer = A5; // Set the potentiometer connected to pin A5 of Arduino
+int White = 2; // Set white LED connected to pin 2 of Arduino
+int Blue = 3;  // Set blue LED connected to pin 3 of Arduino
+int Green = 4; // Set green LED connected to pin 4 of Arduino
+int Red = 5; // Set red LED connected to pin 5 of Arduino
+int Yellow = 6; // Set yellow LED connected to pin 6 of Arduino
+
+
+void setup(){ // Setup to run code once
+  
+ pinMode(potentiometer,INPUT); // Set potentiometer as an input
+ 
+ pinMode(White,OUTPUT);  // Set white as an output
+ pinMode(Blue,OUTPUT);   // Set blue as an output
+ pinMode(Green,OUTPUT);  // Set green as an output
+ pinMode(Red,OUTPUT);    // Set red as an output
+ pinMode(Yellow,OUTPUT); // Set yellow as an output
+ Serial.begin(9600);     // Open serial monitor at 9600 baud rate
+  
+}
+
+void loop(){ // Run code in loop
+  
+  int bitValue = analogRead(potentiometer); // Set bit value equal to the read value from A0
+  float voltageValue = bitValue*(5.0/1023.0); // Set voltage value equal to the calculated value from the calculation
+
+  Serial.print("Voltagevalue ="); // Print on serial monitor
+  delay(1000);                    // Delay for 1 second
+  Serial.println(voltageValue);   // Print on SM the read voltage value
+  delay(1000);                    // Delay for 1 second
+  
+  
+  if(bitValue < 204.8)  // If 204.8 is greater than the read value from the potentiometer then do this:
+  {
+   digitalWrite(White, HIGH);   // Set White as HIGH/ON
+   digitalWrite(Blue, LOW);     // Set Blue as LOW/OFF
+   digitalWrite(Green, LOW);   // Set Green as LOW/OFF
+   digitalWrite(Red, LOW);     // Set Red as LOW/OFF
+   digitalWrite(Yellow, LOW);  // Set Yellow as LOW/OFF
+  }
+  else if (bitValue < 409.6)  // If 409.6 is greater than the read value from the potentiometer then do this:
+  {
+   digitalWrite(White, HIGH);   // Set White as HIGH/ON
+   digitalWrite(Blue, HIGH);    // Set Blue as HIGH/ON
+   digitalWrite(Green, LOW);   // Set Green as LOW/OFF
+   digitalWrite(Red, LOW);     // Set Red as LOW/OFF
+   digitalWrite(Yellow, LOW);  // Set Yellow as LOW/OFF
+  }
+  else if (bitValue < 614.4) // If 614.4 is greater than the read value from the potentiometer then do this:
+  {
+   digitalWrite(White, HIGH);   // Set White as HIGH/ON
+   digitalWrite(Blue, HIGH);    // Set Blue as HIGH/ON
+   digitalWrite(Green, HIGH);   // Set Green as HIGH/ON
+   digitalWrite(Red, LOW);     // Set Red as LOW/OFF
+   digitalWrite(Yellow, LOW);  // Set Yellow as LOW/OFF
+  }
+  else if (bitValue < 819.2)  // If 819.2 is greater than the read value from the potentiometer then do this:
+   {
+   digitalWrite(White, HIGH);   // Set White as HIGH/ON
+   digitalWrite(Blue, HIGH);    // Set Blue as HIGH/ON
+   digitalWrite(Green, HIGH);   // Set Green as HIGH/ON
+   digitalWrite(Red, HIGH);     // Set Red as HIGH/ON
+   digitalWrite(Yellow, LOW);  // Set Yellow as LOW/OFF
+  }
+ 
+  else if (bitValue < 1024) // If 1024 is greater than the read value from the potentiometer then do this:
+ {
+   digitalWrite(White, HIGH);   // Set White as HIGH/ON
+   digitalWrite(Blue, HIGH);    // Set Blue as HIGH/ON
+   digitalWrite(Green, HIGH);   // Set Green as HIGH/ON
+   digitalWrite(Red, HIGH);     // Set Red as HIGH/ON
+   digitalWrite(Yellow, HIGH);  // Set Yellow as HIGH/ON
+  }
+  
+
+}
