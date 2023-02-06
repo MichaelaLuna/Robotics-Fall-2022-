@@ -1,0 +1,37 @@
+/* This program is used to explore the use and capabilities of a potentiometer.
+ * A potentiometer is a three-terminal resistor with a wiper that acts as an
+ * adjustable voltage divider. With the help of the Arduino UNO board and the 
+ * IDE of it, we would be able to know the bit value and even the voltage value
+ * that our potentiometer produces as we rotates it. As the wiper of the 
+ * potentiometer goes to the left side or zero, the voltage goes up and the inverse
+ * for the other way. The goal of this program is to learn how to use analogRead() 
+ * which will allow us to read a bit value and learn how to convert it to a voltage value.
+ */
+
+int potentiometer = A0; // Initialize potentiometer as an integer and as connected to A0 of Arduino
+
+
+void setup() { // Setup to run code once
+  
+  pinMode(potentiometer, OUTPUT); // Set potentiometer as an Output
+  Serial.begin(9600); // Open serial monitor at 9600 baud rate
+
+}
+
+void loop() { // Setup to run code in loop
+  
+  float bitValue = analogRead(A0); // Set bit value equal to the read value from A0
+  float voltageValue = bitValue*( 5.0/1023.0 ); // Set voltage value equal to the calculated value from the calculation
+
+  // Both are in float so gathered values are not integers
+  
+  Serial.print("Bitvalue ="); // Print on serial monitor
+  delay(1000);                // Delay for 1 second
+  Serial.println(bitValue);   // Print on SM the read bit value
+  delay(1000);                // Delay for 1 second
+  
+  Serial.print("Voltagevalue ="); // Print on serial monitor
+  delay(1000);                    // Delay for 1 second
+  Serial.println(voltageValue);   // Print on SM the read voltage value
+  delay(1000);                    // Delay for 1 second
+}
