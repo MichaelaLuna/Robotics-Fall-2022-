@@ -1,0 +1,47 @@
+/* This program is used to control an RGB led. A RGB led is a combination of three 
+ * LEDs in just one package: red, green and blue. This led can be controlled in
+ * various ways, for example, controlling it with a push button and producing
+ * various colors with playing with the mix of HIGH and LOW. The goal of this
+ * program is to learn how to control an RGB and to use the condition statement
+ * if else ().
+*/
+
+int Red = 12;   // Set strip of RGB as color red and pin 12
+int Blue = 11;  // Set strip of RGB as color blue and pin 11
+int Green = 10; // Set strip of RGB as color green and pin 10
+int Push_Button = 9; // Set push button as connected to pin 9
+int push; // Initialize push that has a value of integer
+  
+void setup(){ // Setup code to run once
+  
+  pinMode(Red,OUTPUT);   // Set Red as an output
+  pinMode(Blue,OUTPUT);  // Set Blue as an output
+  pinMode(Green,OUTPUT); // Set Green as an output
+  pinMode(Push_Button,INPUT); // Set Push Button as an input
+  
+}
+
+void loop(){ // Setup code to run on loop
+  
+  push = digitalRead(Push_Button); // Set "push" equal to the read value on the PB
+  
+  if(push == HIGH){ // If push is HIGH/ON
+                    
+  digitalWrite(Red,LOW); // Set Red light off
+  digitalWrite(Blue,LOW); // Set Blue light off
+  digitalWrite(Green,LOW); // Set Green light off
+  delay(1000); // Delay for one second
+  
+  }
+  
+  else{ // If that is not the case;
+        // Set all to HIGH/ON so RGB will produce a white color
+    
+  digitalWrite(Red,HIGH); // Set Red light on
+  digitalWrite(Blue,HIGH); // Set Blue light on
+  digitalWrite(Green,HIGH); // Set Green light on
+  delay(1000); // Delay for one second
+  }
+
+} 
+   
